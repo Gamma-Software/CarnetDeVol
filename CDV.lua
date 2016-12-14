@@ -832,33 +832,10 @@ local function run(event)
 	--  ----------------------------------------------------
   	if event == EVT_MENU_BREAK then
   		currentWindow = currentWindow + 1
-
   		if currentWindow == 3 then
 	    	alreadyReadTotalFlight = false
   			currentWindow = 1
   		end
-
-
-  	-- 	if not inComboSelection then
-			
-
-	  --   	if currentWindow == 2 then
-	  --   		resetComboChoice()
-	  -- 			inComboSelection = true
-	  --   	else
-	  -- 			inComboSelection = false
-	  -- 		end
-	  --   	if currentWindow == 2 then
-	  --   		currentWindow = 1
-	  --   	end
-  	-- 	else
-  	-- 		currentWindow = currentWindow + 1
-  	-- 		if currentWindow == 3 then
-	  --   		currentWindow = 1
-	  --   	end
-			-- alreadyReadTotalFlight = false
-			-- inComboSelection = false
-  	-- 	end
   	end
 
   	if currentWindow == 1 then
