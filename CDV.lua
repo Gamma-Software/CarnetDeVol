@@ -167,10 +167,10 @@ local function writeTotalFlightTime()
 	local stringTotalFlightTime = ""
 
 	-- First read current total flight time
-	local totalFlight = io.open("CDV/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "r") -- open file in append mode
+	local totalFlight = io.open("CDV/DONT_MODIFY/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "r") -- open file in append mode
 	-- If it doesn't exist
 	if totalFlight == nil then
-		local totalFlight = io.open("CDV/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "w") -- create and open file
+		local totalFlight = io.open("CDV/DONT_MODIFY/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "w") -- create and open file
 		io.write(totalFlight, math.floor(totalFlightTime)) -- exemple: 1304 for 0h 21min 44sec
 		io.close(totalFlight) -- Close the file
 		return 0
@@ -187,7 +187,7 @@ local function writeTotalFlightTime()
 
 
 	if tonumber(stringTotalFlightTime) ~= nil then
-		local totalFlight3 = io.open("CDV/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "w") --open file in write mode
+		local totalFlight3 = io.open("CDV/DONT_MODIFY/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "w") --open file in write mode
 		io.write(totalFlight3, math.floor(currentTimeFlight + tonumber(stringTotalFlightTime))) -- exemple: 1304 for 0h 21min 44sec
 		io.close(totalFlight3) -- Close the file
 	end
@@ -198,7 +198,7 @@ local function readTotalFlightTime()
 	local data = ""
 
 	-- First read current total flight time
-	local file = io.open("CDV/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "r") -- open file in append mode
+	local file = io.open("CDV/DONT_MODIFY/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "r") -- open file in append mode
 	-- If it doesn't exist
 	if file ~= nil then
 		while true do
@@ -211,7 +211,7 @@ local function readTotalFlightTime()
 		io.close(file)
 		lcd.drawTimer(1, 25,tonumber(readTotalFlight),TIMEHOUR + MIDSIZE)
 	else
-		file = io.open("CDV/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "w")
+		file = io.open("CDV/DONT_MODIFY/TotalFlightTime/"..nameModel.."_totalFlightTime.txt", "w")
 		readTotalFlight = 0
 		io.write(file, readTotalFlight)
 		io.close(file)
@@ -419,7 +419,7 @@ local function readSetting()
 	local inc = 0
 	local data = ""
 
-	local file = io.open("CDV/DONT_MODIFY/Settings/settings.txt", "r") -- open file in append mode
+	local file = io.open("CDV/settings.txt", "r") -- open file in append mode
 	-- If it exist
 	if file ~= nil then
 		while true do
@@ -745,7 +745,7 @@ end
 local function designPageReadTotalFlightTime(event)
 	lcd.drawScreenTitle(totalFlightTimeString[currentLanguage], 1, 2)
 
-	lcd.drawPixmap(140, 10, "CDV/Images/timer.bmp")
+	lcd.drawPixmap(140, 10, "CDV/DONT_MODIFY/Images/timer.bmp")
 	lcd.drawText(1, 10,totalFlightTimeString[currentLanguage]..": ", MIDSIZE)
 
 	if not alreadyReadTotalFlight then 
@@ -832,6 +832,7 @@ local function run(event)
 	--  ----------------------------------------------------
   	if event == EVT_MENU_BREAK then
   		currentWindow = currentWindow + 1
+
   		if currentWindow == 3 then
 	    	alreadyReadTotalFlight = false
   			currentWindow = 1
